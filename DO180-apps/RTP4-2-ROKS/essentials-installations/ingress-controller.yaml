@@ -1,6 +1,0 @@
-ingressClass: "nginx"
-extraArgs:
-  annotations-prefix: "ingress.kubernetes.io"
-config:
-  # Required only if redis is not activated for bmrg-auth-proxy
-  http-snippet: proxy_cache_path /tmp/nginx levels=1:2 keys_zone=authentication:10m inactive=3s;
