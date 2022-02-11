@@ -1,0 +1,41 @@
+Grafana Deployment:
+
+1. Deploy Helm chart of grafana in UAT
+
+helm upgrade --install ocp-grafana-uat bitnami/grafana --set imageRenderer.enabled=true,admin.user=admin,admin.password=admin,persistence.storageClass=ibmc-block-silver,persistence.size=25Gi,config.useGrafanaIniFile=true,config.grafanaIniConfigMap=grafana-config,grafana.containerSecurityContext.enabled=false,grafana.podSecurityContext.enabled=false --namespace ocp-grafana (running)
+
+helm upgrade --install ocp-grafana-uat bitnami/grafana --set imageRenderer.enabled=true,admin.user=admin,admin.password=admin,persistence.storageClass=ibmc-block-silver,persistence.size=25Gi,config.useGrafanaIniFile=true,config.grafanaIniConfigMap=grafana-config,grafana.containerSecurityContext.enabled=false,grafana.podSecurityContext.enabled=false,imageRenderer.containerSecurityContext.enabled=false,imageRenderer.podSecurityContext.enabled=false --namespace ocp-grafana
+
+
+2. provide cluster-monitoring-view policy to SA of grafana
+   
+    oc adm policy add-cluster-role-to-user cluster-monitoring-view -z ocp-grafana-uat 
+
+3. Get the service token from grafana instance
+   
+    oc serviceaccounts get-token ocp-grafana-uat  -n ocp-grafana 
+
+4. Add datasource as Prometheus with following settings
+
+   a. URL - https://prometheus-k8s.openshift-monitoring.svc:9091
+   b. Enable Skip TLS
+   c. Add Header for Authorization as Header name and Value to be "Bearer <sa token from step 3>"
+
+
+Prometheus enablement for third part & customized application.
+
+Before doing this activity please refer below document
+	https://docs.openshift.com/container-platform/4.5/monitoring/monitoring-your-own-services.html
+	https://docs.openshift.com/container-platform/4.6/monitoring/enabling-monitoring-for-user-defined-projects.html
+	https://docs.openshift.com/container-platform/4.6/monitoring/configuring-the-monitoring-stack.html [user workload monitoring config]
+	https://docs.openshift.com/container-platform/4.6/monitoring/managing-metrics.html#managing-metrics
+	https://docs.openshift.com/container-platform/4.6/monitoring/troubleshooting-monitoring-issues.html [troubleshooting]
+
+1. Deploy cluster-monitoring Configmap in openshift-monitoring namespace
+   
+     oc -n openshift-monitoring create -f cluster-monitoring-config.yaml
+
+2. Deploy Cluster-user-workload-monitoring-config.yaml in openshift-user-workload-monitoring namespace
+
+    
+     oc -n openshift-user-workload-monitoring create -f cluster-user-workload-monitoring-config.yaml

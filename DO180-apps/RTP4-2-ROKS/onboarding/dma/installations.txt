@@ -1,0 +1,8 @@
+1. airflow
+2. mongo
+4. kafka
+5. mysql
+6. apps and svcs
+
+
+Created domain specific TLS inside airflow

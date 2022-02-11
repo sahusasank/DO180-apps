@@ -1,0 +1,65 @@
+KT Session #1 https://ibm.webex.com/ibm/ldr.php?RCID=5d149d58e8e30a72c344418c255235d0
+Password - cB55RJYx
+Attendees - Radha M De/ Dibyendu Pal / Diptendu Sarkar / Mukesh Kumar
+Date - 10-Aug-2021
+Docs Landing Page - https://servicesessentials.ibm.com/docs/
+Core App Arch - https://servicesessentials.ibm.com/docs/essentials-core/7.7.0/architecture/application-architecture
+Please see the 
+Application Arch
+Framework Arch
+Security Arch
+Configuration Arch
+Network Arch
+How to User Guide for Core - https://servicesessentials.ibm.com/docs/essentials-core/7.7.0/how-to-guide/launchpad
+How to Admin Guide for Core - https://servicesessentials.ibm.com/docs/essentials-core/7.7.0/how-to-admin/admin
+Essentials Core Installation - https://servicesessentials.ibm.com/docs/essentials-core/7.7.0/installing/prerequisites
+ICP 3.2.x Documentation - https://www.ibm.com/docs/en/cloud-private/3.2.x?topic=getting-started
+ICP CLI Tools - https://9.42.28.90:8443/console/tools/cli
+SRE Knowledge Refresh - https://ibm.ent.box.com/file/660908979336
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+KT Session #2 https://ibm.webex.com/ibm/ldr.php?RCID=abd32401df0a2b4b16e72e61bc2b0c98
+Password - jRbNnva7
+Attendees - Radha M De/ Dibyendu Pal / Diptendu Sarkar / Mukesh Kumar
+Date - 11-Aug-2021
+HELM Chart Standards - https://servicesessentials.ibm.com/docs/ise/1.0.0/standards/helm-charts
+Jaeger Integration - https://servicesessentials.ibm.com/docs/ise/1.0.0/standards/helm-charts/#jaeger-integration
+Core Arch https://servicesessentials.ibm.com/docs/static/3e9721fc1fef198511e027f2bf364564/23bef/architecture-infrastructure.png
+New Relic - https://one.newrelic.com (For access Dragos/Rajib)
+RTP4 Jaeger - https://rtp4.cloud.boomerangplatform.net/ops/jaeger
+FRA6  Jaeger - https://fra6.cloud.boomerangplatform.net/ops/jaeger/search
+Support SLA - https://ibm.ent.box.com/file/845607827396
+Key Points - 
+RTP4 Dev/QA
+EOL Sept 2021 --> Running in IBM DC
+No Proxy, all outbound calls are allowed
+No resources limits defined per ns
+Dev Core - https://rtp4.cloud.boomerangplatform.net/dev/launchpad/
+QA Core - https://rtp4.cloud.boomerangplatform.net/qa/launchpad/
+FRA6/FRA1
+Running in IBM Cloud
+With Forward Proxy for outbound call --> Common for both fra6/fra1
+Default resource limits applied per ns
+FRA6 Core - https://fra6.cloud.boomerangplatform.net/uat/launchpad/
+FRA1 Core - https://fra1.cloud.boomerangplatform.net/prod/launchpad/
+CICD -- Owned and supported by bmrg-support team
+Cluster Backup --> Velero(AWS S3 twice a day) (For access Dragos/Rajib)
+Monitoring & Alerting -- > New Relic & Pagerduty
+PV/PVC
+Glusterfs - https://www.ibm.com/docs/en/cloud-private/3.2.0?topic=private-glusterfs
+https://www.ibm.com/docs/en/cloud-private/3.2.x?topic=support-storage
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+KT Session #3 https://ibm.webex.com/ibm/ldr.php?RCID=e3d365ba6f8bbb6ed3a06bf4f86bbd1b
+Password - wWRmB6yX
+Attendees - Radha M De/ Dibyendu Pal / Diptendu Sarkar / Mukesh Kumar
+Date - 12-Aug-2021
+Installation of middleware(mysql)
+Separation of namespaces in UAT/PROD against Dev/QA
+Sample solution deployment steps/flows
+Basic helm commands
+Common Issues(logs/Deployment/debugging and mysql space issue)
+Chart deployment by SREs
+UAT/PROD Chart Deployment -- Only Tuesday/Thursday)
+Dev team can deploy ms changes anytime/anyday(Not chart)
+Please Join the team "IAP Ticketing" for Jira ticket Access at(Login and click join team, search for IAP Ticketing and submit the request) - https://servicesessentials.ibm.com/launchpad
+Added all to the slack channels
+

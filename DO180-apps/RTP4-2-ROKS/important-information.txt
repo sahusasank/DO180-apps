@@ -1,0 +1,89 @@
+ROKS Dev
+--------
+Slack Channel: roks-dev-sre
+
+cloud account: 
+
+UID: Automation.Platform.Services@ibm.com
+PWD: me8yxecxnh3ovive
+
+Session-1
+ROKS Installation
+https://ibm.webex.com/recordingservice/sites/ibm/recording/playback/f2a9e2a7ede31039b9d30050568166c3
+7nYuJdTr
+
+
+Session-2:
+Vyatta Indtallation:
+https://ibm.webex.com/recordingservice/sites/ibm/recording/playback/519a237beed2103996be0050568f090e
+PWD: iHnPFQU2
+
+Add View Access for Grafana to Prometheus
+oc policy add-role-to-user view system:serviceaccount:oc-grafana:my-grafana -n openshift-monitoring
+
+
+API Key: 8RckhGur07lR2gPhsTkvl7Un8JIqML9tJEe0Hp4c5DMm
+Login : ibmcloud login -r "eu-gb" --apikey 8RckhGur07lR2gPhsTkvl7Un8JIqML9tJEe0Hp4c5DMm
+ibmcloud login -r "eu-de" --apikey 8RckhGur07lR2gPhsTkvl7Un8JIqML9tJEe0Hp4c5DMm
+OC Login:  oc login https://c113-e.eu-de.containers.cloud.ibm.com:32453 -u apikey -p 8RckhGur07lR2gPhsTkvl7Un8JIqML9tJEe0Hp4c5DMm
+
+Setting Registry Quota Unlimited:
+
+$>ibmcloud cr plan-upgrade
+
+Cross check quota
+
+$>ibmcloud cr quota
+
+Domain Details: devcluster-9fb7e40700ceec3a76e70fdb30f06230-0000.eu-de.containers.appdomain.cloud
+External IP: 158.177.192.115
+
+Proposed Domain Names
+dev.automationessentials.com
+uat.automationessentials.com
+prod.automationessentials.com
+-------------------------------------
+automationessentials.com/dev
+automationessentials.com/uat
+automationessentials.com/prod
+
+
+Adding Policy
+---------------
+2021/09/06 15:42:52 [warn] 1#1: the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2
+nginx: [warn] the "user" directive makes sense only if the master process runs with super-user privileges, ignored in /etc/nginx/nginx.conf:2
+
+Solution: https://access.redhat.com/documentation/en-us/openshift_container_platform/3.11/html/cluster_administration/admin-guide-manage-scc
+oc adm policy add-scc-to-group anyuid system:authenticated
+scc "anyuid" added to groups: ["system:authenticated"]
+
+
+Essentials Installations
+---------------------------
+Registry Server: us.icr.io/boomerang-lib-docker-external/ise
+API Key: 4acB4UTzy4Sjp2QQcdYz72p6XOTKDpeeV6eh8pexzgr3
+ibmcloud login -r "us-south" --apikey 4acB4UTzy4Sjp2QQcdYz72p6XOTKDpeeV6eh8pexzgr3
+
+helm3 install ocp-core-dev -f ess-core-values-ibm.yaml boomerang-charts/ess-core --version 5.7.5 --debug
+helm3 install ocp-core-dev -f ess-core-values-ibm-v1.yaml boomerang-charts/ess-core --version 5.7.5 --debug
+helm3 upgrade --install ocp-core-dev -f boomerang-charts-ess-core.yaml boomerang-charts/ess-core --version 5.9.6 --debug
+
+helm3 install ocp-auth-proxy-dev -f iap-auth-proxy-dev-3.3.1.yaml boomerang-charts/bmrg-auth-proxy --version 3.3.1
+helm3 install ocp-auth-proxy-dev -f iap-auth-proxy-dev-3.3.1.yaml boomerang-io/bmrg-auth-proxy --version 3.3.2 --debug
+
+helm3 install ocp-auth-proxy-dev -f iap-auth-proxy-dev-3.3.1.yaml boomerang-io/bmrg-auth-proxy --version 3.3.2 --debug
+helm3 upgrade --install ocp-auth-proxy-dev -f iap-auth-proxy-dev-3.3.1.yaml boomerang-io/bmrg-auth-proxy --version 3.3.2 --debug
+
+Lanuch Pad : https://devcluster-9fb7e40700ceec3a76e70fdb30f06230-0000.eu-de.containers.appdomain.cloud/dev/launchpad
+
+
+https://github.ibm.com/essentials-core/installer/blob/stable/yamls/bmrg-auth-proxy-basic-values.yaml
+
+Auth Callback URL: https://devcluster-9fb7e40700ceec3a76e70fdb30f06230-0000.eu-de.containers.appdomain.cloud/dev/oauth/callback
+https://preprod.login.w3.ibm.com/oidc/endpoint/default
+
+
+MySQL Installations
+-------------------
+
+helm3 install mysql-release --set auth.rootPassword=passw0rd,primary.persistence.enabled=false,metrics.enabled=true bitnami/mysql

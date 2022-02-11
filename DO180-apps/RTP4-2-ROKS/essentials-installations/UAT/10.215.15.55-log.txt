@@ -1,0 +1,116 @@
+Name:               10.215.15.55
+Roles:              master,worker
+Labels:             arch=amd64
+                    beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/instance-type=m3c.8x64.encrypted
+                    beta.kubernetes.io/os=linux
+                    failure-domain.beta.kubernetes.io/region=eu-de
+                    failure-domain.beta.kubernetes.io/zone=fra02
+                    ibm-cloud.kubernetes.io/encrypted-docker-data=true
+                    ibm-cloud.kubernetes.io/external-ip=158.177.222.222
+                    ibm-cloud.kubernetes.io/iaas-provider=softlayer
+                    ibm-cloud.kubernetes.io/internal-ip=10.215.15.55
+                    ibm-cloud.kubernetes.io/machine-type=m3c.8x64.encrypted
+                    ibm-cloud.kubernetes.io/os=REDHAT_7_64
+                    ibm-cloud.kubernetes.io/region=eu-de
+                    ibm-cloud.kubernetes.io/sgx-enabled=false
+                    ibm-cloud.kubernetes.io/worker-id=kube-c5siiinf02ufdcs70r6g-uatcluster-default-0000061c
+                    ibm-cloud.kubernetes.io/worker-pool-id=c5siiinf02ufdcs70r6g-aed19b3
+                    ibm-cloud.kubernetes.io/worker-pool-name=default
+                    ibm-cloud.kubernetes.io/worker-version=4.6.48_1561_openshift
+                    ibm-cloud.kubernetes.io/zone=fra02
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=10.215.15.55
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/master=
+                    node-role.kubernetes.io/worker=
+                    node.kubernetes.io/instance-type=m3c.8x64.encrypted
+                    node.openshift.io/os_id=rhel
+                    privateVLAN=3136950
+                    publicVLAN=3136948
+                    topology.kubernetes.io/region=eu-de
+                    topology.kubernetes.io/zone=fra02
+Annotations:        projectcalico.org/IPv4Address=10.215.15.55/26
+                    projectcalico.org/IPv4IPIPTunnelAddr=172.30.102.0
+CreationTimestamp:  Wed, 27 Oct 2021 16:17:16 +0530
+Taints:             node.kubernetes.io/unreachable:NoExecute
+                    node.kubernetes.io/unreachable:NoSchedule
+Unschedulable:      false
+Conditions:
+  Type                 Status    LastHeartbeatTime                 LastTransitionTime                Reason              Message
+  ----                 ------    -----------------                 ------------------                ------              -------
+  NetworkUnavailable   False     Wed, 27 Oct 2021 16:18:49 +0530   Wed, 27 Oct 2021 16:18:49 +0530   CalicoIsUp          Calico is running on this node
+  MemoryPressure       Unknown   Fri, 05 Nov 2021 20:38:24 +0530   Fri, 05 Nov 2021 20:43:51 +0530   NodeStatusUnknown   Kubelet stopped posting node status.
+  DiskPressure         Unknown   Fri, 05 Nov 2021 20:38:24 +0530   Fri, 05 Nov 2021 20:43:51 +0530   NodeStatusUnknown   Kubelet stopped posting node status.
+  PIDPressure          Unknown   Fri, 05 Nov 2021 20:38:24 +0530   Fri, 05 Nov 2021 20:43:51 +0530   NodeStatusUnknown   Kubelet stopped posting node status.
+  Ready                Unknown   Fri, 05 Nov 2021 20:38:24 +0530   Fri, 05 Nov 2021 20:43:51 +0530   NodeStatusUnknown   Kubelet stopped posting node status.
+Addresses:
+  InternalIP:  10.215.15.55
+  ExternalIP:  158.177.222.222
+  Hostname:    10.215.15.55
+Capacity:
+ cpu:                8
+ ephemeral-storage:  103078840Ki
+ hugepages-1Gi:      0
+ hugepages-2Mi:      0
+ memory:             65795524Ki
+ pods:               110
+Allocatable:
+ cpu:                7900m
+ ephemeral-storage:  94369515442
+ hugepages-1Gi:      0
+ hugepages-2Mi:      0
+ memory:             60026308Ki
+ pods:               110
+System Info:
+ Machine ID:                              ded182c8757846ee8960619c83a2e704
+ System UUID:                             D65BE2E5-777E-F0B3-8C4D-E1E46030EDA6
+ Boot ID:                                 daf05de3-8c8e-4962-867d-741ae6b6dc50
+ Kernel Version:                          3.10.0-1160.45.1.el7.x86_64
+ OS Image:                                Red Hat
+ Operating System:                        linux
+ Architecture:                            amd64
+ Container Runtime Version:               cri-o://1.19.4-3.rhaos4.6.git7d25e5d.el7
+ Kubelet Version:                         v1.19.14+fcff70a
+ Kube-Proxy Version:                      v1.19.14+fcff70a
+PodCIDR:                                  172.30.5.0/24
+ProviderID:                               ibm://2b825dcfac3645b3a1c9fbe48b91e792///c5siiinf02ufdcs70r6g/kube-c5siiinf02ufdcs70r6g-uatcluster-default-0000061c
+Non-terminated Pods:                      (29 in total)
+  Namespace                               Name                                                          CPU Requests  CPU Limits  Memory Requests  Memory Limits
+  ---------                               ----                                                          ------------  ----------  ---------------  -------------
+  calico-system                           calico-node-v8qdz                                             250m (3%)     0 (0%)      80Mi (0%)        0 (0%)
+  calico-system                           calico-typha-666656fb47-dm8jl                                 250m (3%)     0 (0%)      80Mi (0%)        0 (0%)
+  iap-core-uat                            iap-core-services-metering-76667776bd-djc2l                   0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  iap-core-uat                            ocp-auth-proxy-uat-redis-master-0                             0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  ibm-system                              ibm-cloud-provider-ip-158-177-223-59-84b95894c9-cpspj         5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
+  kube-system                             ibm-keepalived-watcher-r8s7n                                  5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
+  kube-system                             ibm-master-proxy-static-10.215.15.55                          25m (0%)      300m (3%)   32M (0%)         512M (0%)
+  kube-system                             ibmcloud-block-storage-driver-sfcp7                           50m (0%)      300m (3%)   100Mi (0%)       300Mi (0%)
+  kube-system                             nginx-controller-nginx-ingress-controller-76fcccb569-vvpdk    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  openshift-cluster-node-tuning-operator  cluster-node-tuning-operator-5d4686b466-8gnrz                 10m (0%)      0 (0%)      20Mi (0%)        0 (0%)
+  openshift-cluster-node-tuning-operator  tuned-lbhll                                                   10m (0%)      0 (0%)      50Mi (0%)        0 (0%)
+  openshift-cluster-samples-operator      cluster-samples-operator-5b8c98556-xq6ks                      20m (0%)      0 (0%)      0 (0%)           0 (0%)
+  openshift-cluster-storage-operator      cluster-storage-operator-5b47754f47-fjbbq                     10m (0%)      0 (0%)      20Mi (0%)        0 (0%)
+  openshift-console                       downloads-59cc69bd8d-22pvk                                    10m (0%)      0 (0%)      50Mi (0%)        0 (0%)
+  openshift-dns                           dns-default-hfvnf                                             65m (0%)      0 (0%)      110Mi (0%)       512Mi (0%)
+  openshift-image-registry                node-ca-ksxtw                                                 10m (0%)      0 (0%)      10Mi (0%)        0 (0%)
+  openshift-kube-proxy                    openshift-kube-proxy-h8wrq                                    100m (1%)     0 (0%)      200Mi (0%)       0 (0%)
+  openshift-marketplace                   marketplace-operator-5788c4b7bb-dh25z                         10m (0%)      0 (0%)      50Mi (0%)        0 (0%)
+  openshift-monitoring                    cluster-monitoring-operator-7f4559f6c5-97cvc                  11m (0%)      0 (0%)      70Mi (0%)        0 (0%)
+  openshift-monitoring                    node-exporter-nnt45                                           9m (0%)       0 (0%)      210Mi (0%)       0 (0%)
+  openshift-monitoring                    thanos-querier-5bcdcdff97-sfp8t                               9m (0%)       0 (0%)      92Mi (0%)        0 (0%)
+  openshift-multus                        multus-admission-controller-g2kcp                             20m (0%)      0 (0%)      20Mi (0%)        0 (0%)
+  openshift-multus                        multus-j4wz7                                                  10m (0%)      0 (0%)      150Mi (0%)       0 (0%)
+  openshift-multus                        network-metrics-daemon-wbkb9                                  20m (0%)      0 (0%)      120Mi (0%)       0 (0%)
+  openshift-operator-lifecycle-manager    olm-operator-76765fdd4b-2dmzg                                 10m (0%)      0 (0%)      160Mi (0%)       0 (0%)
+  openshift-operator-lifecycle-manager    packageserver-68f9b87dd8-tj24s                                10m (0%)      0 (0%)      50Mi (0%)        0 (0%)
+  openshift-roks-metrics                  push-gateway-6fbfb497dc-md5v4                                 10m (0%)      0 (0%)      50Mi (0%)        0 (0%)
+  openshift-service-ca-operator           service-ca-operator-7b65f8bbbd-ztcdw                          10m (0%)      0 (0%)      80Mi (0%)        0 (0%)
+  openshift-user-workload-monitoring      prometheus-operator-54747ff7d7-lvmhz                          2m (0%)       0 (0%)      27Mi (0%)        0 (0%)
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  Resource  Requests        Limits
+  --------  --------        ------
+  cpu       951m (12%)      600m (7%)
+  memory    1893906Ki (3%)  1363443712 (2%)
+Events:     <none>

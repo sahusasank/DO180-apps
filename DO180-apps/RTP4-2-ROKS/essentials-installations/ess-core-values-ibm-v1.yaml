@@ -1,0 +1,333 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+#General Configuration
+general:
+  namePrefix: iap-core
+  enable:
+    apis: false
+    debug: false
+    docs: false
+    metering: false
+    notifications: true
+    support: false
+    welcome: false
+
+# General Image Configuration
+image:
+  registry: us.icr.io/boomerang-lib-docker-external/ise
+  pullPolicy: IfNotPresent
+  pullSecret: ocp.registrykey.v1
+
+# Job Configuraiton
+job:
+  data:
+    enabled: true
+    profile: core
+    image:
+      repository: /core-loader
+      tag: 0.3.46-81
+
+opa:
+  enabled: false
+  image:
+    repository: openpolicyagent/opa
+    tag: 0.13.5
+  replicaCount: 0
+  service:
+    type: ClusterIP
+
+# App Configuration
+apps:
+  admin:
+    image:
+      repository: /core-app-admin
+      tag: 5.6.168-845
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+  catalog:
+    image:
+      repository: /core-app-catalog
+      tag: 1.6.32-215
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+  content:
+    image:
+      repository: /core-app-welcome
+      tag: 0.1.14-34
+    replicaCount: 0
+    service:
+      type: ClusterIP
+    zone: untrusted
+  docs:
+    image:
+      repository: /core-app-docs
+      tag: 1.12.19-366
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+  launchpad:
+    image:
+      repository: /core-app-launchpad
+      tag: 5.5.153-754
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+  status:
+    image:
+      repository: /core-app-status
+      tag: 5.3.41-142
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+
+# Micro Service Configuration
+# If you change these, you will need to change the common chart as well to import into other charts
+services:
+  admin:
+    image:
+      repository: /core-service-admin
+      tag: 8.6.154-958
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+  audit:
+    image:
+      repository: /core-service-audit
+      tag: 1.2.33-59
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: semi-trusted
+  auth:
+    image:
+      repository: /core-service-auth
+      tag: 6.2.45-118
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: semi-trusted
+  controller:
+    image:
+      repository: /core-service-controller
+      tag: 0.2.1-38
+    replicaCount: 1
+    securityPolicy: ibm-privileged-psp
+    service:
+      type: ClusterIP
+    zone: semi-trusted
+  launchpad:
+    image:
+      repository: /core-service-launchpad
+      tag: 6.3.225-573
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+  messaging:
+    image:
+      repository: /core-service-messaging
+      tag: 0.1.73-90
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: semi-trusted
+  metering:
+    image:
+      repository: /core-service-metering
+      tag: 0.1.19-30
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: semi-trusted
+  notifications:
+    image:
+      repository: /core-service-notifications
+      tag: 1.3.10-79
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+  settings:
+    image:
+      repository: /core-service-settings
+      tag: 0.1.4-45
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: semi-trusted
+  status:
+    image:
+      repository: /core-service-status
+      tag: 5.2.78-153
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+  support:
+    image:
+      repository: /core-service-support
+      tag: 6.4.195-203
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+  users:
+    image:
+      repository: /core-service-users
+      tag: 1.2.64-156
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+    # resources:
+    #   requests:
+    #     cpu: "200m"
+    #     memory: "1Gi"
+    #   limits:
+    #     cpu: "200m"
+    #     memory: "1Gi"
+
+clients:
+  apis:
+    image:
+      repository: /core-client-apis
+      tag: 0.0.66-60
+    replicaCount: 1
+    service:
+      type: ClusterIP
+    zone: untrusted
+
+ingress:
+  enabled: true
+  # Used if you want a context prefix such as /dev. Useful if installing multiple with the same DNS
+  root: "/dev"
+  # This parameter may be blank if you are manually generating the ingress or route to this instance
+  host: devcluster-9fb7e40700ceec3a76e70fdb30f06230-0000.eu-de.containers.appdomain.cloud
+  tlsSecretName: ocp-tls-cloud-dev
+  # alpha flag for combining everything into a single ingress definition
+  singleIngressFile: false
+  # The prefix for the annotations inside the ingress definition. Typically for IKS Community Ingress
+  # you need to set it to "nginx.ingress.kubernetes.io"
+  annotationsPrefix: "ingress.kubernetes.io"
+  # The class of the ingress, it is used to mark the ingress resources to be picked-up by a specific 
+  # controller. For IKS Community Ingress set it to "public-iks-k8s-nginx"
+  class: "nginx"
+
+auth:
+  enabled: true
+  mode: oauth
+  serviceName: iap-auth-proxy
+  namespace: iap-core-dev
+  prefix: /oauth
+  signOutRedirect:
+
+# resources:
+#   services:
+#     requests:
+#       cpu: "100m"
+#       memory: "512Mi"
+#     limits:
+#       cpu: "100m"
+#       memory: "512Mi"
+#   apps:
+#     requests:
+#       cpu: "100m"
+#       memory: "512Mi"
+#     limits:
+#       cpu: "100m"
+#       memory: "512Mi"
+
+hostAliases: []  
+
+proxy:
+  enable: false
+  host:
+  port:
+
+database:
+  mongodb:
+    host: ocp-core-dev-mdb001-mongodb
+    port: 27017
+    user: boomerang
+    password: passw0rd
+    adminPassword: "QF4u7GBAMS"
+    secretName: ocp-core-dev-mdb001-mongodb
+
+ldap:
+  host: 
+  port: 389
+  base: dc=boomerangplatform,dc=net
+  user: cn=Directory Manager
+  password: passw0rd
+  userPassword: passw0rd
+  secretName: 
+
+monitoring:
+  newrelic:
+    apm:
+      name: Boomerang Private
+      key:
+      image: 
+        registry: boomerangio
+        repository: /util-newrelicjavaagent
+        tag: 5.14.0
+    browser:
+      id:
+      key: 
+  jaeger: 
+    enabled: false
+    namespace: 
+    agent: 
+      host: jaeger-dev-agent
+      port: 6831
+    collector: 
+      host: jaeger-dev-collector
+      port: 14268
+    remoteControlledSampler: 
+      host: jaeger-dev-agent
+      port: 5778
+  contrast:
+    enable: false
+    api:
+      url: https://app.contrastsecurity.com/Contrast
+      key: 
+      username: 
+      service:
+        key: 
+      proxy:
+        # Either http or https
+        scheme: http
+    server:
+      name: ServerName
+      environment: development
+    image: 
+      registry: boomerangio
+      repository: /util-contrastjavaagent
+      tag: 3.8.0.18219
+
+wordpress:
+  url: 
+
+nodeSelector: {}
+# nodeSelector:
+#   proxy: "true"
+
+affinity: {}
+# affinity:
+#   key1: "value1"
+#   key2: "value2"
+
+tolerations: []
+# tolerations:
+# - key: "dedicated"
+#   operator: "Exists"
+#   effect: "NoSchedule"

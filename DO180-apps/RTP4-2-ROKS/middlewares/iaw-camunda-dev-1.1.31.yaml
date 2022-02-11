@@ -1,0 +1,40 @@
+COMPUTED VALUES:
+bmrgcommon:
+  global: {}
+database:
+  host: iaw-mysql001.iaw-dev
+  password: platform@db123#
+  port: 3306
+  testOnBorrow: true
+  username: iawdbadmin
+general:
+  namePrefix: null
+image:
+  name: customcamundaconnectcore
+  pullPolicy: IfNotPresent
+  registry: devcluster-9fb7e40700ceec3a76e70fdb30f06230-0000.eu-de.containers.appdomain.cloud:5000
+  replicaCount: 1
+  repository: /common
+  tag: 1.0.0-ao-camundaiaprelease.01-57
+ingress:
+  annotations: null
+  enabled: falsess
+  hosts:
+  - chart-example.local
+  tls: null
+resources:
+  limits:
+    cpu: 500m
+    memory: 2Gi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+service:
+  port: 8080
+  type: ClusterIP
+  zone: semi-trusted
+services:
+  customcamundaconnectcore:
+    image:
+      repository: /isap/isap-customcamundaconnectcore
+      tag: 1.0.0-ao-camundacore.48-47

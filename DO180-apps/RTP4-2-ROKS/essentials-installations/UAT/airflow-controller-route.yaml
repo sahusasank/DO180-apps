@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: airflow-controller-route
+  namespace: airflow
+spec:
+  host: ocpdev-bf81ce958557b26d920de1cfd83896d7-0000.us-south.containers.appdomain.cloud
+  to:
+    kind: Service
+    name: my-airflow
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: passthrough
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

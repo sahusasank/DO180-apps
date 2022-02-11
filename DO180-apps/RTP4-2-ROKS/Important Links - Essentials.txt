@@ -1,0 +1,16 @@
+A) CI/CD
+
+https://servicesessentials.ibm.com/docs/boomerang-cicd/8.2.0/how-to-guide/scorecard
+
+https://servicesessentials.ibm.com/docs/boomerang-cicd/8.2.0/how-to-guide/pipelines#stage-flow
+
+https://servicesessentials.ibm.com/docs/boomerang-cicd/8.1.0/introduction/frequently-asked-questions/#sonarqube-test-activi[…]not-create-project-key
+
+B) EFK
+https://www.youtube.com/watch?v=9kXNPGqK4ZY
+https://www.studytonight.com/post/setup-elasticsearch-with-authentication-xpack-security-enabled-on-kubernetes
+https://github.com/kubernetes/examples/tree/master/staging/elasticsearch
+https://www.elastic.co/guide/en/kibana/current/using-kibana-with-security.html
+https://github.com/elastic/cloud-on-k8s/blob/1.1/config/recipes/associations-rbac/apm_es_kibana_rbac.yaml
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.1/html/logging/efk-logging-deploying
+https://www.youtube.com/watch?v=3cX4ap0vXec [Create Roles]

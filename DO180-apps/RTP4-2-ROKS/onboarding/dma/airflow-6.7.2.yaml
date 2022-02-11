@@ -1,0 +1,586 @@
+COMPUTED VALUES:
+affinity: {}
+airflow:
+  auth:
+    existingSecret: null
+    fernetKey: null
+    forcePassword: false
+    password: null
+    username: user
+  baseUrl: http://127.0.0.1:8080
+  cloneDagFilesFromGit:
+    branch: master
+    enabled: true
+    repository: https://cogniuat:acb15f61ad3fa13d851b565a356219adeab5f567@github.ibm.com/IBM-DataOps/sap-kpi-airflow-dags
+  clonePluginsFromGit:
+    branch: null
+    enabled: false
+    path: null
+    repository: null
+  configurationConfigMap: null
+  dagsConfigMap: null
+  extraEnvVars: []
+  extraEnvVarsCM: null
+  extraEnvVarsSecret: null
+  gitCloneContainer:
+    args: null
+    command: null
+    extraEnvVars: null
+    extraEnvVarsCM: null
+    extraEnvVarsSecret: null
+    extraVolumeMounts: null
+  gitSyncContainer:
+    args: null
+    command: null
+    extraEnvVars: null
+    extraEnvVarsCM: null
+    extraEnvVarsSecret: null
+    extraVolumeMounts: null
+  gitSyncInterval: 60
+  loadExamples: false
+  scheduler:
+    args: null
+    command: null
+    extraEnvVars: null
+    extraEnvVarsCM: null
+    extraEnvVarsSecret: null
+    extraVolumeMounts: null
+    resources:
+      limits: {}
+      requests: {}
+  web:
+    args: null
+    command: null
+    extraEnvVars: null
+    extraEnvVarsCM: null
+    extraEnvVarsSecret: null
+    extraVolumeMounts: null
+    resources:
+      limits: {}
+      requests: {}
+  worker:
+    args: null
+    command: null
+    extraEnvVars: null
+    extraEnvVarsCM: null
+    extraEnvVarsSecret: null
+    extraVolumeMounts: null
+    podAnnotations: null
+    podManagementPolicy: null
+    port: 8793
+    replicas: 1
+    resources:
+      limits: {}
+      requests: {}
+common:
+  exampleValue: common-chart
+  global:
+    storageClass: ibmc-block-silver
+commonAnnotations: {}
+commonLabels: {}
+externalDatabase:
+  database: bitnami_airflow
+  existingSecret: ""
+  host: localhost
+  password: ""
+  port: 5432
+  user: bn_airflow
+externalRedis:
+  existingSecret: ""
+  host: localhost
+  password: ""
+  port: 6379
+  username: null
+fullnameOverride: null
+git:
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+  registry: docker.io
+  repository: bitnami/git
+  tag: 2.29.2-debian-10-r20
+global:
+  storageClass: ibmc-block-silver
+image:
+  debug: false
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+  registry: docker.io
+  repository: bitnami/airflow
+  tag: 1.10.12-debian-10-r69
+ingress:
+  annotations: null
+  certManager: false
+  enabled: true
+  hosts:
+  - name: airflow.ocpdev-bf81ce958557b26d920de1cfd83896d7-0000.us-south.containers.appdomain.cloud
+    path: /
+    tls: true
+    tlsHosts: []
+    tlsSecret: airflow.local-tls
+  secrets: null
+ldap:
+  base: ou=example,o=org
+  binddn: cn=user,ou=example,o=org
+  bindpw: ""
+  enabled: false
+  tls:
+    CAcertificateFilename: ""
+    CAcertificateSecret: ""
+    allowSelfSigned: true
+    enabled: false
+  uidField: uid
+  uri: ldap://ldap_server:389
+livenessProbe:
+  enabled: true
+  failureThreshold: 6
+  initialDelaySeconds: 180
+  periodSeconds: 20
+  successThreshold: 1
+  timeoutSeconds: 5
+metrics:
+  enabled: false
+  image:
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+    registry: docker.io
+    repository: bitnami/airflow-exporter
+    tag: 0.20180711.0-debian-10-r278
+  podAnnotations:
+    prometheus.io/port: "9112"
+    prometheus.io/scrape: "true"
+  podLabels: {}
+  resources: {}
+  tolerations: []
+nameOverride: null
+nodeAffinityPreset:
+  key: ""
+  type: ""
+  values: []
+nodeSelector: {}
+podAffinityPreset: ""
+podAntiAffinityPreset: soft
+postgresql:
+  commonAnnotations: {}
+  enabled: true
+  existingSecret: ""
+  extraEnv: []
+  global:
+    postgresql: {}
+    storageClass: ibmc-block-silver
+  image:
+    debug: false
+    pullPolicy: IfNotPresent
+    registry: docker.io
+    repository: bitnami/postgresql
+    tag: 11.8.0-debian-10-r57
+  ldap:
+    baseDN: ""
+    bindDN: ""
+    enabled: false
+    port: ""
+    prefix: ""
+    scheme: ""
+    search_attr: ""
+    search_filter: ""
+    server: ""
+    suffix: ""
+    tls: false
+    url: ""
+  livenessProbe:
+    enabled: true
+    failureThreshold: 6
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+  master:
+    affinity: {}
+    annotations: {}
+    extraInitContainers: []
+    extraVolumeMounts: []
+    extraVolumes: []
+    labels: {}
+    nodeSelector: {}
+    podAnnotations: {}
+    podLabels: {}
+    priorityClassName: ""
+    service: {}
+    sidecars: []
+    tolerations: []
+  metrics:
+    enabled: false
+    extraEnvVars: {}
+    image:
+      pullPolicy: IfNotPresent
+      registry: docker.io
+      repository: bitnami/postgres-exporter
+      tag: 0.8.0-debian-10-r163
+    livenessProbe:
+      enabled: true
+      failureThreshold: 6
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    prometheusRule:
+      additionalLabels: {}
+      enabled: false
+      namespace: ""
+      rules: []
+    readinessProbe:
+      enabled: true
+      failureThreshold: 6
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    securityContext:
+      enabled: false
+      runAsUser: 1001
+    service:
+      annotations:
+        prometheus.io/port: "9187"
+        prometheus.io/scrape: "true"
+      type: ClusterIP
+    serviceMonitor:
+      additionalLabels: {}
+      enabled: false
+  networkPolicy:
+    allowExternal: true
+    enabled: false
+    explicitNamespacesSelector: {}
+  persistence:
+    accessModes:
+    - ReadWriteOnce
+    annotations: {}
+    enabled: true
+    mountPath: /bitnami/postgresql
+    size: 8Gi
+    subPath: ""
+  postgresqlDataDir: /bitnami/postgresql/data
+  postgresqlDatabase: bitnami_airflow
+  postgresqlUsername: bn_airflow
+  psp:
+    create: false
+  rbac:
+    create: false
+  readinessProbe:
+    enabled: true
+    failureThreshold: 6
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+  replication:
+    applicationName: my_application
+    enabled: false
+    numSynchronousReplicas: 0
+    password: repl_password
+    slaveReplicas: 1
+    synchronousCommit: "off"
+    user: repl_user
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+  securityContext:
+    enabled: false
+    fsGroup: 1001
+    runAsUser: 1001
+  service:
+    annotations: {}
+    port: 5432
+    type: ClusterIP
+  serviceAccount:
+    enabled: false
+  shmVolume:
+    chmod:
+      enabled: true
+    enabled: true
+  slave:
+    affinity: {}
+    annotations: {}
+    extraInitContainers: |
+      # - name: do-something
+      #   image: busybox
+      #   command: ['do', 'something']
+    extraVolumeMounts: []
+    extraVolumes: []
+    labels: {}
+    nodeSelector: {}
+    podAnnotations: {}
+    podLabels: {}
+    priorityClassName: ""
+    service: {}
+    sidecars: []
+    tolerations: []
+  updateStrategy:
+    type: RollingUpdate
+  volumePermissions:
+    enabled: false
+    image:
+      pullPolicy: Always
+      registry: docker.io
+      repository: bitnami/minideb
+      tag: buster
+    securityContext:
+      runAsUser: 0
+rbac:
+  create: false
+readinessProbe:
+  enabled: true
+  failureThreshold: 6
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 5
+redis:
+  cluster:
+    enabled: true
+    slaveCount: 2
+  clusterDomain: cluster.local
+  configmap: |-
+    # Enable AOF https://redis.io/topics/persistence#append-only-file
+    appendonly yes
+    # Disable RDB persistence, AOF persistence already enabled.
+    save ""
+  enabled: true
+  existingSecret: ""
+  global:
+    redis: {}
+    storageClass: ibmc-block-silver
+  image:
+    pullPolicy: IfNotPresent
+    registry: docker.io
+    repository: bitnami/redis
+    tag: 6.0.8-debian-10-r0
+  master:
+    affinity: {}
+    command: /run.sh
+    configmap: null
+    customLivenessProbe: {}
+    customReadinessProbe: {}
+    disableCommands:
+    - FLUSHDB
+    - FLUSHALL
+    extraEnvVars: []
+    extraEnvVarsCM: []
+    extraEnvVarsSecret: []
+    extraFlags: []
+    livenessProbe:
+      enabled: true
+      failureThreshold: 5
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 5
+    persistence:
+      accessModes:
+      - ReadWriteOnce
+      enabled: true
+      matchExpressions: {}
+      matchLabels: {}
+      path: /data
+      size: 8Gi
+      subPath: ""
+    podAnnotations: {}
+    podLabels: {}
+    priorityClassName: {}
+    readinessProbe:
+      enabled: true
+      failureThreshold: 5
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 1
+    service:
+      annotations: {}
+      labels: {}
+      port: 6379
+      type: ClusterIP
+    shareProcessNamespace: false
+    statefulset:
+      updateStrategy: RollingUpdate
+  metrics:
+    enabled: false
+    image:
+      pullPolicy: IfNotPresent
+      registry: docker.io
+      repository: bitnami/redis-exporter
+      tag: 1.11.1-debian-10-r12
+    podAnnotations:
+      prometheus.io/port: "9121"
+      prometheus.io/scrape: "true"
+    prometheusRule:
+      additionalLabels: {}
+      enabled: false
+      namespace: ""
+      rules: []
+    service:
+      annotations: {}
+      labels: {}
+      type: ClusterIP
+    serviceMonitor:
+      enabled: false
+      selector:
+        prometheus: kube-prometheus
+  networkPolicy:
+    enabled: false
+    ingressNSMatchLabels: {}
+    ingressNSPodMatchLabels: {}
+  password: ""
+  persistence: {}
+  podDisruptionBudget:
+    enabled: false
+    minAvailable: 1
+  podSecurityPolicy:
+    create: false
+  rbac:
+    create: false
+    role:
+      rules: []
+  redisPort: 6379
+  securityContext:
+    enabled: false
+    fsGroup: 1001
+    runAsUser: 1001
+  sentinel:
+    customLivenessProbe: {}
+    customReadinessProbe: {}
+    downAfterMilliseconds: 60000
+    enabled: false
+    failoverTimeout: 18000
+    image:
+      pullPolicy: IfNotPresent
+      registry: docker.io
+      repository: bitnami/redis-sentinel
+      tag: 6.0.8-debian-10-r1
+    initialCheckTimeout: 5
+    livenessProbe:
+      enabled: true
+      failureThreshold: 5
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 5
+    masterSet: mymaster
+    parallelSyncs: 1
+    port: 26379
+    quorum: 2
+    readinessProbe:
+      enabled: true
+      failureThreshold: 5
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 1
+    service:
+      annotations: {}
+      labels: {}
+      redisPort: 6379
+      sentinelPort: 26379
+      type: ClusterIP
+    staticID: false
+    usePassword: true
+  serviceAccount:
+    create: false
+  slave:
+    affinity: {}
+    command: /run.sh
+    configmap: null
+    customLivenessProbe: {}
+    customReadinessProbe: {}
+    disableCommands:
+    - FLUSHDB
+    - FLUSHALL
+    extraEnvVars: []
+    extraEnvVarsCM: []
+    extraEnvVarsSecret: []
+    extraFlags: []
+    livenessProbe:
+      enabled: true
+      failureThreshold: 5
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 5
+    persistence:
+      accessModes:
+      - ReadWriteOnce
+      enabled: true
+      matchExpressions: {}
+      matchLabels: {}
+      path: /data
+      size: 8Gi
+      subPath: ""
+    podAnnotations: {}
+    podLabels: {}
+    port: 6379
+    readinessProbe:
+      enabled: true
+      failureThreshold: 5
+      initialDelaySeconds: 5
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 10
+    service:
+      annotations: {}
+      labels: {}
+      port: 6379
+      type: ClusterIP
+    shareProcessNamespace: false
+    spreadConstraints: {}
+    statefulset:
+      updateStrategy: RollingUpdate
+  sysctlImage:
+    command: []
+    enabled: false
+    mountHostSys: false
+    pullPolicy: Always
+    registry: docker.io
+    repository: bitnami/minideb
+    resources: {}
+    tag: buster
+  tls:
+    authClients: true
+    enabled: false
+  usePassword: true
+  usePasswordFile: false
+  volumePermissions:
+    enabled: false
+    image:
+      pullPolicy: Always
+      registry: docker.io
+      repository: bitnami/minideb
+      tag: buster
+    resources: {}
+rollingUpdatePartition: null
+schedulerImage:
+  debug: false
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+  registry: docker.io
+  repository: bitnami/airflow-scheduler
+  tag: 1.10.12-debian-10-r82
+securityContext:
+  enabled: false
+  fsGroup: 1001
+  runAsUser: 1001
+service:
+  annotations: null
+  nodePort: null
+  port: 8080
+  type: ClusterIP
+serviceAccount:
+  annotations: {}
+  create: false
+storageClass: ibmc-block-silver
+tolerations: []
+updateStrategy: RollingUpdate
+workerImage:
+  debug: false
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+  registry: docker.io
+  repository: bitnami/airflow-worker
+  tag: 1.10.12-debian-10-r71

@@ -1,0 +1,67 @@
+A) Installing Grafana in chosen namespace within cluster
+B) Install services with metrics, but install its corresponding servicemonitor in openshift-monitoring namespace, where Openshift's default Prometheus remains
+C) Custom Prometheus and Grafana can be installed in openshift-user-workload-monitoring namespace within cluster, else installing promethus in other place will crash original promethus
+
+
+
+
+
+INSTALLING GRAFANA IN OCP AND CONNECT WITH DEFAULT OCP PROMETHEUS
+---------------------------------------------------------------------
+
+**************************************************************
+References:
+https://bitnami.com/stack/grafana/helm
+https://github.com/bitnami/charts/tree/master/bitnami/grafana/#installing-the-chart
+https://grafana.com/docs/grafana/latest/administration/configuration/#login_maximum_inactive_lifetime_duration
+
+Grafana Dashboard Importing Site:
+https://grafana.com/grafana/dashboards/7685
+Grafana Kubernetes Cluster Dashboard:
+https://grafana.com/grafana/dashboards/6417
+Grafana All Pods:
+https://grafana.com/grafana/dashboards/6588
+Grafana Persistent Volumes:
+https://grafana.com/grafana/dashboards/13646
+Kubernetes Pods (Prometheus):
+https://grafana.com/grafana/dashboards/6336
+
+**************************************************************
+
+1. Installa Grafana Operator in chosen namespace (e.g., oc-grafa)
+2. Create GrafanaDataSource instance inside Grafana Operator in a chosen namespace (e.g. oc-grafana)
+3. Add bitnami/grafana chart in local
+
+helm3 add repo bitnami https://charts.bitnami.com/bitnami
+
+4. Install bitname/grafa with below parameters
+
+helm3 upgrade --install my-grafana bitnami/grafana --set imageRenderer.enabled=true,datasources.secretName=datasource-secret,admin.user=admin,admin.password=admin,service.type=NodePort,persistence.storageClass=ibmc-block-silver,persistence.size=25Gi,config.useGrafanaIniFile=true,config.grafanaIniConfigMap=grafana-config --namespace oc-grafana
+
+Where datasource-secret came from GrafanaData Source
+
+5. Create grafana-config from grafana-config.yaml
+6. Change one or more parameters in grafana-config.yaml as needed and redeploy every time
+7. restart pod for grafana to reload the latest grafana.ini file which is affected by adding grafana-config.yaml
+   Parameters like session timeout, smtp settings, etc. are being passed into grafana.ini of container via this process
+
+8. Adding different popular dashboards for grafana by importing them with code 
+9. Mark Grafana Kubernetes Cluster Dashboard with star and make it home page for Grafana from preferences
+10. userid and password are admin/admin
+
+
+
+ENHANCING OCP DEFAULT PROMETHEUS
+------------------------------------
+
+Default Prometheus doesn't have persistence storage, metrics size and retention time, email configurations, security, etc.
+
+**************************************************************
+Reference: https://docs.openshift.com/container-platform/4.5/monitoring/cluster_monitoring/configuring-the-monitoring-stack.html#modifying-retention-time-for-prometheus-metrics-data_configuring-monitoring
+
+**************************************************************
+
+1. Run oc command to creare cluster-monitoring-config configmap in openshift-monitoring namespace, with following command:
+
+oc -n openshift-monitoring get configmap cluster-monitoring-config
+

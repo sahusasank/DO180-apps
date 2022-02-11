@@ -1,0 +1,85 @@
+Cluster Trouble Shooting 
+
+https://gist.github.com/ruo91/98b965daaa0d3fdddb05eea2362a50c4
+
+
+
+1. Create a service id for allow group access for administering UAT Cluster
+  
+   API Key: Qoa4hvP3krHGp00JdyTcGQnm2OTFPtsQA2AhKAWAtGdw
+   Cluster Host: uat-cluster-9fb7e40700ceec3a76e70fdb30f06230-0000.eu-de.containers.appdomain.cloud
+   Cluster IP: 158.177.223.58
+
+2. Create an access group for UAT ROKS Administration
+
+   name: uat-roks-admin
+
+3. Login into UAT Cluster
+
+   A) ibmcloud login -r "eu-de" --apikey Qoa4hvP3krHGp00JdyTcGQnm2OTFPtsQA2AhKAWAtGdw
+   B) ibmcloud cs cluster config -c uat-cluster
+   C) oc login https://c115-e.eu-de.containers.cloud.ibm.com:31296 -u apikey -p Qoa4hvP3krHGp00JdyTcGQnm2OTFPtsQA2AhKAWAtGdw
+
+4. Essentials Installations
+
+   A) create namespace iap-core-uat
+   B) create secret inside namespace from openshift-ingress. need to copy YAML of cluster secret 
+     B.1) get CRN
+     ibmcloud oc ingress secret get -c uat-cluster --name uat-cluster-9fb7e40700ceec3a76e70fdb30f06230-0000 --namespace openshift-ingress
+
+     B.2) Extract CRN from earlier command
+
+     B.3) Create Secret to the target namespace after adding CRN in below command
+
+ibmcloud oc ingress secret create --cluster uat-cluster --cert-crn crn:v1:bluemix:public:cloudcerts:eu-de:a/2b825dcfac3645b3a1c9fbe48b91e792:430d2e1d-4a58-4612-85c1-787fa82fa07f:certificate:a40570da2b45f6848dea14e30b0c8974 --name ocp-tls-cloud-uat --namespace iap-core-uat
+
+
+   C) Install Mongo in it
+      C.1) enabling servicemonitor
+      C.2) enabling metrics
+      C.3) Disabling security context to pick up namespace's runAsUser and fsGroup IDs
+    
+      helm3 install ocp-core-uat-mdb001-mongodb -f ocp-core-dev-mdb002-mongodb-7.8.8.yaml --namespace iap-core-uat bitnami/mongodb --version 7.8.8 --debug
+
+   
+   D) Install NGINX Ingress Cluster
+
+    helm3 install nginx-controller -f nginx-ingress-controller-7.6.21.yaml bitnami/nginx-ingress-controller --version 7.6.21 --namespace kube-system
+
+   E) Install NGINX Route
+
+   oc apply -f ingress-controller-route.yaml 
+
+   F) Installing Auth Proxy
+
+      F.1) go to link: https://ies-provisioner.prod.identity-services.intranet.ibm.com/tools/sso/home
+      F.2) Register your application with w3id
+      F.3) Client ID: OTFlYWVkMmMtM2Q4YS00  / Secret : OTMzMmNiOTYtODRjYi00
+      F.4) Redirect URIs: https://uat-cluster-9fb7e40700ceec3a76e70fdb30f06230-0000.eu-de.containers.appdomain.cloud/uat/oauth/callback
+
+    helm3 upgrade --install ocp-auth-proxy-uat -f ocp-auth-proxy-dev-3.3.2.yaml boomerang-io/bmrg-auth-proxy --version 3.3.2 --debug   
+
+
+   G) Install Core 
+      D.1) Editing ocp-core-dev-5.7.5.yaml file
+      D.2) Change MongoDB host/secret 
+      D.3) Change Ingress Cluster (make UAT) and TLS Secret
+
+   Installing Essentials Core
+   
+   helm3 upgrade --install ocp-core-uat -f ocp-core-dev-5.7.5.yaml boomerang-charts/ess-core --version 5.7.5 --debug [Shall we try for latest 5.10.1 version of core ?]
+
+
+   H) Check Launchpad
+
+   https://uat-cluster-9fb7e40700ceec3a76e70fdb30f06230-0000.eu-de.containers.appdomain.cloud/uat/launchpad
+
+   I) Get Activation Code
+	helm3 get notes ocp-core-dev
+	kubectl get secret --namespace iap-core-dev iap-core-secrets -o jsonpath="{.data.CORE_OTC}" | base64 --decode
+
+5. Enabling Default Prometheus 
+   
+   Refer: Grafana-Deployment.txt
+
+
